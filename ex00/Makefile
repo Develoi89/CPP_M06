@@ -1,9 +1,10 @@
 NAME		=	test
 
 SRC			=	main.cpp\
-				ScalarConvverter.cpp
+				convert.cpp\
+				ScalarConverter.cpp
 
-HDS			=	ScalarConvverter.hpp
+HDS			=	ScalarConverter.hpp
 
 OBJ			=	$(SRC:.cpp=.o)
 

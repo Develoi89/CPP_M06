@@ -19,7 +19,7 @@ class ScalarConverter
         ScalarConverter & operator = (ScalarConverter const &c);
         std::string getStr()const;
         int getLen()const;
-        void convert(std::string s);
+        void convert();
 };
 
 std::ostream &operator << ( std::ostream & o, const ScalarConverter &f );

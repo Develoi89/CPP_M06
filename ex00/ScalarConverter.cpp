@@ -35,6 +35,6 @@ int ScalarConverter::getLen()const
 std::ostream &operator << ( std::ostream & o, const ScalarConverter &f )
 {
     o << "String: " << f.getStr() << std::endl;
-    o << "String: " << f.getLen() << std::endl;
+    o << "String: " << f.getLen();
     return o;
 }
