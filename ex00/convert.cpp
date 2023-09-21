@@ -1,64 +1,66 @@
 #include "ScalarConverter.hpp"
 
-void ScalarConverter::convert()
+void isRationalNumber(std::string s)
 {
-    //en esta parte comprobamos que solo tenga un digito no numerico para saber si es un char.
-    if((_slenght == 1) && (_s[0] >= 32 && _s[0] <= 126) && !(_s[0] >= 48 && _s[0] <= 57))
-        std::cout << "is a displayable char!!!" << std::endl;
-    //en esta otra parte comprobamos que este unico digito es numerico para saber si es un int.
-    else if((_slenght == 1) && (_s[0] >= 32 && _s[0] <= 126) && (_s[0] >= 48 && _s[0] <= 57))
+    unsigned long i = 1;
+    while(i < s.length() && (s[i] >= 48 && s[i] <= 57))
+        i++;
+    if (i == s.length())
         std::cout << "is a int!!!" << std::endl;
-    //en el siguiente "else if" empezamos a evaluar los casos en los que la string es de mas de un digito.
-    else if (_slenght > 1)
+    else if (s[i] == 46)
     {
-        //en el primer if, evaluamos la posibilidad que el primer digito sea un signo i el siguiente
-        //numérico o punto y asi lo podemos catalogar si o si como numerico ya sea int float o double.
-        if((((_s[0] == 45 || _s[0] == 43) || (_s[0] >= 48 && _s[0] <= 57))) &&
-            ((_s[1] >= 48 && _s[1] <= 57) || (_s[1] == 46)))
-        {
-            int i = 1;
-            while(i < _slenght && (_s[i] >= 48 && _s[i] <= 57))
-                i++;
-            if (i == _slenght)
-                std::cout << "is a int!!!" << std::endl;
-            //con este else if buscamos el punto para catalogar la variable como float o double.
-            else if (_s[i] == 46)
-            {
-                i++;
-                while(i < _slenght && (_s[i] >= 48 && _s[i] <= 57))
-                    i++;
-                if (i == _slenght && (_s[i - 1] >= 48 && _s[i- 1] <= 57))
-                    std::cout << "is a double!!!" << std::endl;
-                else if (i == _slenght - 1 && (_s[i] == 102))
-                    std::cout << "is a float!!!" << std::endl;
-                else
-                    std::cout << "is a wrong argument" << std::endl;
-            }
-            else
-                std::cout << "is a wrong argument" << std::endl;
-        }
-        //comprobamos las excepciones de los infinitos para los floats y los doubles.
-        else if((_s[0] == 45 || _s[0] == 43) && (_s[1] < 48 || _s[1] > 57))
-        {
-            const char *istr[4] = {"+inff", "-inff" , "-inf", "+inf"};
-            int         i = 0;
-            while (i < 4)
-            {
-                if (!_s.compare(istr[i]))
-                    std::cout << "is float or double: " << istr[i] << std::endl;
-                i++;
-            }
-        }//comprobamos los "nan" para doubles y floats.
-        else if(!(_s[0] >= 48 && _s[0] <= 57))
-        {
-            const char *istr[2] = {"nan", "nanf"};
-            if (!_s.compare(istr[0]))
-                std::cout << "is float or double: " << istr[0] << std::endl;
-            else if (!_s.compare(istr[1]))
-                std::cout << "is float or double: " << istr[1] << std::endl;
-            else
-                std::cout << "is a string of chars" << std::endl;
-        }
+        i++;
+        while(i < s.length() && (s[i] >= 48 && s[i] <= 57))
+            i++;
+        if (i == s.length() && (s[i - 1] >= 48 && s[i - 1] <= 57))
+            std::cout << "is a double!!!" << std::endl;
+        else if (i == s.length() - 1 && (s[i] == 102))
+            std::cout << "is a float!!!" << std::endl;
+        else
+            std::cout << "is a wrong argument" << std::endl;
+    }
+    else
+        std::cout << "is a wrong argument" << std::endl;
+}
+
+void infFD(std::string s)
+{
+    const char *istr[4] = {"+inff", "-inff" , "-inf", "+inf"};
+    int         i = 0;
+    while (i < 4)
+    {
+        if (s.compare(istr[i]))
+            std::cout << "is float or double: " << istr[i] << std::endl;
+        i++;
+    }
+}
+
+void notANumber(std::string s)
+{
+    const char *istr[2] = {"nan", "nanf"};
+    if (!s.compare(istr[0]))
+        std::cout << "is float or double: " << istr[0] << std::endl;
+    else if (!s.compare(istr[1]))
+        std::cout << "is float or double: " << istr[1] << std::endl;
+    else
+        std::cout << "is a string of chars" << std::endl;
+}
+
+void ScalarConverter::convert(std::string s)
+{
+    if((s.length() == 1) && (s[0] >= 32 && s[0] <= 126) && !(s[0] >= 48 && s[0] <= 57))
+        std::cout << "is a displayable char!!!" << std::endl;
+    else if((s.length() == 1) && (s[0] >= 32 && s[0] <= 126) && (s[0] >= 48 && s[0] <= 57))
+        std::cout << "is a int!!!" << std::endl;
+    else if (s.length() > 1)
+    {
+        if((((s[0] == 45 || s[0] == 43) || (s[0] >= 48 && s[0] <= 57))) &&
+            ((s[1] >= 48 && s[1] <= 57) || (s[1] == 46)))
+            isRationalNumber(s);
+        else if((s[0] == 45 || s[0] == 43) && (s[1] < 48 || s[1] > 57))
+            infFD(s);
+        else if(!(s[0] >= 48 && s[0] <= 57))
+            notANumber(s);
         else
             std::cout << "impossible to sort" << std::endl;
     }

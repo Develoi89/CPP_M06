@@ -9,8 +9,7 @@ int main(int argc, char **argv)
         return 0;
     }
     std::string s = argv[1];
-    ScalarConverter x(s);
-    std::cout << x << std::endl;
-    x.convert();
+    ScalarConverter x;
+    x.convert(s);
     return 0;
 }
