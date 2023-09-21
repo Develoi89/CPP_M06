@@ -1,5 +1,21 @@
 #include "ScalarConverter.hpp"
 
+bool isDisplayable(char c)
+{
+    if(c >= 32 && c <= 126)
+        return true;
+    else
+        return false;
+}
+
+bool isNumeric(char c)
+{
+    if(c >= 48 && c <= 57)
+        return true;
+    else
+        return false;
+}
+
 void isRationalNumber(std::string s)
 {
     unsigned long i = 1;
@@ -48,18 +64,18 @@ void notANumber(std::string s)
 
 void ScalarConverter::convert(std::string s)
 {
-    if((s.length() == 1) && (s[0] >= 32 && s[0] <= 126) && !(s[0] >= 48 && s[0] <= 57))
+    if((s.length() == 1) && isDisplayable(s[0]) && !isNumeric(s[0]))
         std::cout << "is a displayable char!!!" << std::endl;
-    else if((s.length() == 1) && (s[0] >= 32 && s[0] <= 126) && (s[0] >= 48 && s[0] <= 57))
+    else if((s.length() == 1) && isDisplayable(s[0]) && isNumeric(s[0]))
         std::cout << "is a int!!!" << std::endl;
     else if (s.length() > 1)
     {
-        if((((s[0] == 45 || s[0] == 43) || (s[0] >= 48 && s[0] <= 57))) &&
-            ((s[1] >= 48 && s[1] <= 57) || (s[1] == 46)))
+        if((((s[0] == 45 || s[0] == 43) || isNumeric(s[0]))) &&
+            (isNumeric(s[1]) || (s[1] == 46)))
             isRationalNumber(s);
-        else if((s[0] == 45 || s[0] == 43) && (s[1] < 48 || s[1] > 57))
+        else if((s[0] == 45 || s[0] == 43) && !isNumeric(s[1]))
             infFD(s);
-        else if(!(s[0] >= 48 && s[0] <= 57))
+        else if(!isNumeric(s[0]))
             notANumber(s);
         else
             std::cout << "impossible to sort" << std::endl;
