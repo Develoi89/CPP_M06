@@ -11,9 +11,10 @@ void ScalarConverter::convert()
     //en el siguiente "else if" empezamos a evaluar los casos en los que la string es de mas de un digito.
     else if (_slenght > 1)
     {
-        //en el primer if, evaluamos la posibilidad que el primer digito sea un signo i los siguientes todos numericos
-        //y asi lo podemos catalogar si o si como entero.
-        if(((_s[0] == 45 || _s[0] == 43) || (_s[0] >= 48 && _s[0] <= 57)) && (_s[1] >= 48 && _s[1] <= 57))
+        //en el primer if, evaluamos la posibilidad que el primer digito sea un signo i el siguiente
+        //numérico o punto y asi lo podemos catalogar si o si como numerico ya sea int float o double.
+        if((((_s[0] == 45 || _s[0] == 43) || (_s[0] >= 48 && _s[0] <= 57))) &&
+            ((_s[1] >= 48 && _s[1] <= 57) || (_s[1] == 46)))
         {
             int i = 1;
             while(i < _slenght && (_s[i] >= 48 && _s[i] <= 57))
@@ -58,5 +59,7 @@ void ScalarConverter::convert()
             else
                 std::cout << "is a string of chars" << std::endl;
         }
+        else
+            std::cout << "impossible to sort" << std::endl;
     }
 }
