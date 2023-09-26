@@ -66,7 +66,6 @@ void ScalarConverter::notANumber(std::string s)
     const char *istr[2] = {"nan", "nanf"};
     if (!s.compare(istr[0]))
     {
-        std::cout << "HOLIIIII" << std::endl;
         _d = std::stod(s);
         _f = static_cast<float>(_d);
 
@@ -77,7 +76,6 @@ void ScalarConverter::notANumber(std::string s)
     }
     else if (!s.compare(istr[1]))
     {
-        std::cout << "HOLAAAAAAA" << std::endl;
         _f = std::stof(s);
         _d = static_cast<double>(_f);
         std::cout << "char: impossible." << std::endl;
