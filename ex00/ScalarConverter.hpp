@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <limits>
 #include <string>
+#include <stdexcept>
 
 class ScalarConverter
 {
@@ -25,6 +26,8 @@ class ScalarConverter
         void isInt(std::string s);
         void isFloat(std::string s);
         void isDouble(std::string s);
+        void notANumber(std::string s);
+        void infFD(std::string s);
 };
 
 // std::ostream &operator << ( std::ostream & o, const ScalarConverter &f );

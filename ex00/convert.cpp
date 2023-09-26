@@ -33,37 +33,14 @@ int isRationalNumber(std::string s)
             return 1;
         else if (i == s.length() - 1 && (s[i] == 102))
             // std::cout << "is a float!!!" << std::endl;
-            return 1;
+            return 2;
         else
             // std::cout << "is a wrong argument" << std::endl;
-            return 1;
+            return 3;
     }
     else
         // std::cout << "is a wrong argument" << std::endl;
-        return 1;
-}
-
-void infFD(std::string s)
-{
-    const char *istr[4] = {"+inff", "-inff" , "-inf", "+inf"};
-    int         i = 0;
-    while (i < 4)
-    {
-        if (s.compare(istr[i]))
-            std::cout << "is float or double: " << istr[i] << std::endl;
-        i++;
-    }
-}
-
-void notANumber(std::string s)
-{
-    const char *istr[2] = {"nan", "nanf"};
-    if (!s.compare(istr[0]))
-        std::cout << "is double: " << istr[0] << std::endl;
-    else if (!s.compare(istr[1]))
-        std::cout << "is float: " << istr[1] << std::endl;
-    else
-        std::cout << "is a string of chars" << std::endl;
+        return 3;
 }
 
 void ScalarConverter::convert(std::string s)
@@ -79,8 +56,12 @@ void ScalarConverter::convert(std::string s)
             {
             if(!isRationalNumber(s))
                 isInt(s);
-            // else if (isRationalNumber(s)) == 1)
-            // else if (isRationalNumber(s)) == 2)
+            else if (isRationalNumber(s) == 2)
+                isFloat(s);
+            else if (isRationalNumber(s) == 1)
+                isDouble(s);
+            else
+                std::cout << "is a wrong argument" << std::endl;
             }
         else if((s[0] == 45 || s[0] == 43) && !isNumeric(s[1]))
             infFD(s);
