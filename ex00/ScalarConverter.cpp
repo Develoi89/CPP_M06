@@ -206,8 +206,7 @@ void ScalarConverter::isDouble(std::string s)
             }
             else
                 std::cout << "int: out of range." << std::endl;
-            if (temp >= std::numeric_limits<float>::lowest() && temp <= std::numeric_limits<float>::max() &&
-                temp == static_cast<float>(_d))
+            if (temp >= std::numeric_limits<float>::lowest() && temp <= std::numeric_limits<float>::max())
             {
                 _f = static_cast<float>(_d);
                 std::cout << "float: " << _f << "f" << std::endl;
